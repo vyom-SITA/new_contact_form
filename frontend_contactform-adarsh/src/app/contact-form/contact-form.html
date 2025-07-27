@@ -1,0 +1,58 @@
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+  <div>
+    <label for="title">Title</label>
+    <input id="title" formControlName="title" type="text" />
+    <div *ngIf="submitted && f['title'].errors">
+      <small *ngIf="f['title'].errors['required']">Title is required.</small>
+    </div>
+  </div>
+  <div>
+    <label for="firstName">First Name</label>
+    <input id="firstName" formControlName="firstName" type="text" />
+    <div *ngIf="submitted && f['firstName'].errors">
+      <small *ngIf="f['firstName'].errors['required']"
+        >First name is required.</small
+      >
+      <small *ngIf="f['firstName'].errors['pattern']"
+        >First name must contain only letters.</small
+      >
+    </div>
+  </div>
+  <div>
+    <label for="lastName">Last Name</label>
+    <input id="lastName" formControlName="lastName" type="text" />
+    <div *ngIf="submitted && f['lastName'].errors">
+      <small *ngIf="f['lastName'].errors['required']"
+        >Last name is required.</small
+      >
+      <small *ngIf="f['lastName'].errors['pattern']"
+        >Last name must contain only letters.</small
+      >
+    </div>
+  </div>
+  <div>
+    <label for="phone">Phone Number</label>
+    <input id="phoneNumber" formControlName="phoneNumber" type="tel" />
+    <div *ngIf="submitted && f['phoneNumber'].errors">
+      <small *ngIf="f['phoneNumber'].errors['required']"
+        >Phone number is required.</small
+      >
+      <small *ngIf="f['phoneNumber'].errors['pattern']"
+        >Enter a valid phone number (10-15 digits, may start with +).</small
+      >
+    </div>
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input id="email" formControlName="email" type="email" />
+    <div *ngIf="submitted && f['email'].errors">
+      <small *ngIf="f['email'].errors['required']">Email is required.</small>
+      <small *ngIf="f['email'].errors['email']"
+        >Enter a valid email address.</small
+      >
+    </div>
+  </div>
+  <button type="submit">Submit</button>
+  <div *ngIf="successMessage" style="color: green">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" style="color: red">{{ errorMessage }}</div>
+</form>
