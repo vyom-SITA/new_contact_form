@@ -40,13 +40,13 @@ describe('ContactForm', () => {
       title: '',
       firstName: '',
       lastName: '',
-      phone: '',
+      phoneNumber: '',
       email: ''
     });
   });
 
   it('should mark all fields as required', () => {
-    setFormValues(component, { title: '', firstName: '', lastName: '', phone: '', email: '' });
+    setFormValues(component, { title: '', firstName: '', lastName: '', phoneNumber: '', email: '' });
     expect(component.contactForm.invalid).toBeTrue();
     expect(component.f['title'].errors?.['required']).toBeTrue();
     expect(component.f['firstName'].errors?.['required']).toBeTrue();
@@ -60,7 +60,7 @@ describe('ContactForm', () => {
       title: 'Mr',
       firstName: 'John1',
       lastName: 'Doe2',
-      phone: '+1234567890',
+      phoneNumber: '+1234567890',
       email: 'john@example.com'
     });
     expect(component.f['firstName'].errors?.['pattern']).toBeTruthy();
@@ -72,7 +72,7 @@ describe('ContactForm', () => {
       title: 'Mr',
       firstName: 'John',
       lastName: 'Doe',
-      phone: '123',
+      phoneNumber: '123',
       email: 'john@example.com'
     });
     expect(component.f['phone'].errors?.['pattern']).toBeTruthy();
@@ -80,7 +80,7 @@ describe('ContactForm', () => {
       title: 'Mr',
       firstName: 'John',
       lastName: 'Doe',
-      phone: '+1234567890',
+      phoneNumber: '+1234567890',
       email: 'john@example.com'
     });
     expect(component.f['phone'].valid).toBeTrue();
@@ -91,7 +91,7 @@ describe('ContactForm', () => {
       title: 'Mr',
       firstName: 'John',
       lastName: 'Doe',
-      phone: '+1234567890',
+      phoneNumber: '+1234567890',
       email: 'not-an-email'
     });
     expect(component.f['email'].errors?.['email']).toBeTrue();
@@ -99,7 +99,7 @@ describe('ContactForm', () => {
       title: 'Mr',
       firstName: 'John',
       lastName: 'Doe',
-      phone: '+1234567890',
+      phoneNumber: '+1234567890',
       email: 'john@example.com'
     });
     expect(component.f['email'].valid).toBeTrue();
@@ -107,7 +107,7 @@ describe('ContactForm', () => {
 
   it('should not submit if form is invalid', () => {
     spyOn(component, 'onSubmit').and.callThrough();
-    setFormValues(component, { title: '', firstName: '', lastName: '', phone: '', email: '' });
+    setFormValues(component, { title: '', firstName: '', lastName: '', phoneNumber: '', email: '' });
     component.onSubmit();
     expect(component.onSubmit).toHaveBeenCalled();
     expect(component.contactForm.invalid).toBeTrue();
@@ -119,7 +119,7 @@ describe('ContactForm', () => {
       title: 'Mr',
       firstName: 'John',
       lastName: 'Doe',
-      phone: '+1234567890',
+      phoneNumber: '+1234567890',
       email: 'john@example.com'
     });
     component.contactForm.markAsDirty();
@@ -137,7 +137,7 @@ describe('ContactForm', () => {
       title: null,
       firstName: null,
       lastName: null,
-      phone: null,
+      phoneNumber: null,
       email: null
     });
     expect(component.submitted).toBeFalse();
@@ -148,7 +148,7 @@ describe('ContactForm', () => {
       title: 'Mr',
       firstName: 'John',
       lastName: 'Doe',
-      phone: '+1234567890',
+      phoneNumber: '+1234567890',
       email: 'john@example.com'
     });
     component.contactForm.markAsDirty();
