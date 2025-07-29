@@ -63,7 +63,7 @@ public class ContactControllerTest {
     void testCreateContact_ExistingContact() throws Exception {
         Mockito.when(contactRepository.existsById("1234567890")).thenReturn(true);
         String json = "{" +
-                "\"phoneNumber\":\"123456789\"," +
+                "\"phoneNumber\":\"1234567890\"," +
                 "\"firstName\":\"Jane\"," +
                 "\"lastName\":\"Smith\"," +
                 "\"email\":\"jane@example.com\"," +
@@ -72,8 +72,9 @@ public class ContactControllerTest {
         mockMvc.perform(post("/api/post")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isConflict());
     }
+
 
     @Test
     void testGetAllUser() throws Exception {

@@ -3,9 +3,11 @@ package com.example.contact_form_server.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.contact_form_server.model.Contact;
 import com.example.contact_form_server.repository.ContactRepository;
@@ -34,7 +36,7 @@ public class ContactController {
         contact.getPhoneNumber()
     );
         if (exists) {
-            throw new RuntimeException("Contact already exists");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Contact already exists");
             
         }else{
             return contactRepository.save(contact);

@@ -51,7 +51,7 @@ describe('ContactForm', () => {
     expect(component.f['title'].errors?.['required']).toBeTrue();
     expect(component.f['firstName'].errors?.['required']).toBeTrue();
     expect(component.f['lastName'].errors?.['required']).toBeTrue();
-    expect(component.f['phone'].errors?.['required']).toBeTrue();
+    expect(component.f['phoneNumber'].errors?.['required']).toBeTrue();
     expect(component.f['email'].errors?.['required']).toBeTrue();
   });
 
@@ -75,7 +75,7 @@ describe('ContactForm', () => {
       phoneNumber: '123',
       email: 'john@example.com'
     });
-    expect(component.f['phone'].errors?.['pattern']).toBeTruthy();
+    expect(component.f['phoneNumber'].errors?.['pattern']).toBeTruthy();
     setFormValues(component, {
       title: 'Mr',
       firstName: 'John',
@@ -83,7 +83,7 @@ describe('ContactForm', () => {
       phoneNumber: '+1234567890',
       email: 'john@example.com'
     });
-    expect(component.f['phone'].valid).toBeTrue();
+    expect(component.f['phoneNumber'].valid).toBeTrue();
   });
 
   it('should validate email format', () => {
@@ -127,7 +127,7 @@ describe('ContactForm', () => {
     fixture.detectChanges();
     expect(component.contactForm.valid).toBeTrue();
     component.onSubmit();
-    const req = httpMock.expectOne('https://jsonplaceholder.typicode.com/posts');
+    const req = httpMock.expectOne('http://localhost:8080/api/post');
     expect(req.request.method).toBe('POST');
     req.flush({});
     tick();
@@ -156,7 +156,7 @@ describe('ContactForm', () => {
     fixture.detectChanges();
     expect(component.contactForm.valid).toBeTrue();
     component.onSubmit();
-    const req = httpMock.expectOne('https://jsonplaceholder.typicode.com/posts');
+    const req = httpMock.expectOne('http://localhost:8080/api/post');
     expect(req.request.method).toBe('POST');
     req.error(new ErrorEvent('Network error'));
     tick();
